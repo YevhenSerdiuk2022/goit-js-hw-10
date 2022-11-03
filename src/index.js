@@ -2,7 +2,7 @@ import './css/styles.css';
 import ApifetchCountries from './js/fetchCountries';
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
-// import countryListTpl from './templates/list.hbs';
+import countryListTpl from './templates/list.hbs';
 
 
 const DEBOUNCE_DELAY = 300;
@@ -28,7 +28,7 @@ function onSearch(evt) {
             } else if (foundData.length === 0) {
                 Notiflix.Notify.failure('Oops, there is no country with that name');
             } else if (foundData.length >= 2 && foundData.length <= 10) {
-                // apifetchCountries.fetchCountries().then(renderListCountries);
+                apifetchCountries.fetchCountries().then(renderListCountries);
             } else if (foundData.length === 1) {
                 apifetchCountries.fetchCountries().then(renderOneCountry);
             }
@@ -38,9 +38,9 @@ function onSearch(evt) {
     
 }
 
-// function renderListCountries(foundData) {
-//     refs.countryList.insertAdjacentHTML('beforeend', countryListTpl(foundData));
-// }
+function renderListCountries(foundData) {
+    refs.countryList.insertAdjacentHTML('beforeend', countryListTpl(foundData));
+}
 
 
 function cleaerHTML() {
