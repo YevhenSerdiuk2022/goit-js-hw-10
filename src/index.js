@@ -2,7 +2,7 @@ import './css/styles.css';
 import ApifetchCountries from './js/fetchCountries';
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
-import countryListTpl from './templates/list.hbs';
+
 
 
 const DEBOUNCE_DELAY = 300;
@@ -34,13 +34,24 @@ function onSearch(evt) {
             }
         });
     }
-
     
 }
 
-function renderListCountries(foundData) {
-    refs.countryList.insertAdjacentHTML('beforeend', countryListTpl(foundData));
+
+function renderListCountries(countries) {
+  const markup = countries
+    .map(country => {
+      return `<li>
+      <img src="${country.flags.svg}" alt="Flag of ${
+        country.name.official
+      }" width="30" hight="20">
+         <b>${country.name.official}</p>
+                </li>`;
+    })
+    .join('');
+  refs.countryList.innerHTML = markup;
 }
+
 
 
 function cleaerHTML() {
